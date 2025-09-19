@@ -2,51 +2,50 @@
 
 [ext_resource type="Script" uid="uid://82l1c27xikiy" path="res://character_body_3d.gd" id="1_a202f"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
-size = Vector3(50, 1, 50)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a202f"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_noarx"]
+material = SubResource("StandardMaterial3D_a202f")
+size = Vector3(100000, 1, 10000000000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
+size = Vector3(100000, 1, 10000000000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
-albedo_color = Color(0, 0.4040328, 0.034407903, 1)
+albedo_color = Color(0.7239899, 0.7156982, 7.70092e-07, 1)
+metallic = 1.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r3fl7"]
 material = SubResource("StandardMaterial3D_noarx")
-size = Vector3(50, 1, 50)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a202f"]
-albedo_color = Color(0.45490196, 0.3019608, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_r3fl7"]
-material = SubResource("StandardMaterial3D_a202f")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_jka67"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jka67"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="platform3d" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_noarx")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platform3d"]
+mesh = SubResource("BoxMesh_noarx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_a0tk4")
-skeleton = NodePath("../CollisionShape3D")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platform3d"]
+shape = SubResource("BoxShape3D_a0tk4")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2523313, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 212.05376, 0)
 script = ExtResource("1_a202f")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.257019, 0)
+light_color = Color(0.003921569, 1, 1, 1)
+light_energy = 2.814
+light_indirect_energy = 1.66
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("SphereMesh_r3fl7")
+mesh = SubResource("CapsuleMesh_r3fl7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("SphereShape3D_jka67")
+shape = SubResource("CapsuleShape3D_jka67")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10, 0)
-fov = 90.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.983536, 0)
-light_color = Color(0.97051114, 1, 0.61707383, 1)
-light_energy = 12.0
-omni_range = 4096.0
+transform = Transform3D(0.999942, 0.010768625, -4.987916e-10, 0.0008645705, -0.08028138, 0.9967719, 0.0107338615, -0.9967141, -0.080286026, 0, 2.413437, 0)

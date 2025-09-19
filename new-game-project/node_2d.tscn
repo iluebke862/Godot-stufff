@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Script" uid="uid://bf38eak4fbukx" path="res://ian.gd" id="1_wtcfe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y32ns"]
+size = Vector3(100000000, 100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+size = Vector2(100000000, 100)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0e48y"]
+radius = 10.6
+height = 29.29
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_epypp"]
+radius = 10.601
+height = 29.294
+
+[node name="Node2D" type="Node2D"]
+
+[node name="platform" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="platform"]
+mesh = SubResource("BoxMesh_y32ns")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
+shape = SubResource("RectangleShape2D_wtcfe")
+
+[node name="ian" type="CharacterBody2D" parent="."]
+position = Vector2(0, -94)
+script = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ian"]
+shape = SubResource("CapsuleShape2D_0e48y")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ian"]
+mesh = SubResource("CapsuleMesh_epypp")
+
+[node name="Camera2D" type="Camera2D" parent="ian"]
