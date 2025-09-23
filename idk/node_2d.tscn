@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Script" uid="uid://cgmqekgc863we" path="res://idiot(vhan).gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://cmnxtqgmq56b1" path="res://text_edit.gd" id="2_0e48y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0e48y"]
+size = Vector3(200, 20, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(200, 20)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0hol4"]
+radius = 10.0
+height = 30.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q6r6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+size = Vector2(2000, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_epypp"]
+size = Vector3(2000, 200, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="platrom" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="platrom"]
+mesh = SubResource("BoxMesh_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platrom"]
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="idiot(vhan)" type="CharacterBody2D" parent="."]
+position = Vector2(0, -50)
+script = ExtResource("1_wtcfe")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="idiot(vhan)"]
+mesh = SubResource("CapsuleMesh_0hol4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="idiot(vhan)"]
+shape = SubResource("CapsuleShape2D_q6r6c")
+
+[node name="Camera2D" type="Camera2D" parent="idiot(vhan)"]
+
+[node name="TextEdit" type="TextEdit" parent="idiot(vhan)"]
+visible = false
+offset_top = 50.0
+offset_right = 8.0
+offset_bottom = 58.0
+text = "idiot"
+script = ExtResource("2_0e48y")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wtcfe")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D"]
+position = Vector2(99, 1)
+mesh = SubResource("BoxMesh_epypp")
+texture = SubResource("PlaceholderTexture2D_wtcfe")
+
+[connection signal="text_set" from="idiot(vhan)/TextEdit" to="idiot(vhan)" method="_on_text_edit_text_set"]
+[connection signal="area_entered" from="Area2D" to="idiot(vhan)" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="idiot(vhan)" method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="idiot(vhan)" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="idiot(vhan)" method="_on_area_2d_body_exited"]
